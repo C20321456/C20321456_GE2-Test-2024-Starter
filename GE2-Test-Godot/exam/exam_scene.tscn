@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://b26ra08yh7e5m"]
+[gd_scene load_steps=9 format=3 uid="uid://b26ra08yh7e5m"]
 
 [ext_resource type="Script" path="res://behaviors/root.gd" id="1_prfgg"]
-[ext_resource type="Script" path="res://behaviors/CamFollow.gd" id="4_ipa0t"]
 [ext_resource type="PackedScene" uid="uid://ch1g1dtf7c0vk" path="res://exam/FishHead.tscn" id="5_6rhit"]
 [ext_resource type="Script" path="res://behaviors/FPController.gd" id="5_8r2ni"]
 [ext_resource type="Script" path="res://behaviors/SpineAnimator.gd" id="5_ipc4n"]
@@ -30,7 +29,6 @@ shape = SubResource("18")
 transform = Transform3D(-0.00956674, 0.0398395, 0.99916, 0.99982, -0.015966, 0.0102097, 0.0163594, 0.999079, -0.0396796, -0.902516, 0.0108461, 0)
 environment = ExtResource("6_qamsj")
 far = 10000.0
-script = ExtResource("4_ipa0t")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="creature_generator/Player/Camera3D"]
 

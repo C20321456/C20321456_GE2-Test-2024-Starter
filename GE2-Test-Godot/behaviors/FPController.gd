@@ -65,7 +65,9 @@ func _input(event):
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		controlling = ! controlling
 	
-	#if event.is_action_pressed("pause"):
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_P:
+			get_tree().quit()
 		
 
 

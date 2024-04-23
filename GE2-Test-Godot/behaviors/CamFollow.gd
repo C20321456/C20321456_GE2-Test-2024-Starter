@@ -14,6 +14,6 @@ func _ready():
 func _process(delta):
 	
 	transform.origin += transform.basis.z
-	cam.global_position = lerp(cam.global_position, target.global_position, delta * 2)
-	cam.look_at(target.get_parent_node_3d().global_position, Vector3.UP)
+	#cam.global_position = lerp(cam.global_position, target.global_position, delta * 2)
+	#cam.look_at(target.get_parent_node_3d().global_position, Vector3.UP)
 	# pass
