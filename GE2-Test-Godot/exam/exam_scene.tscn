@@ -25,13 +25,6 @@ speed = 10.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.818927, 0, 0)
 shape = SubResource("18")
 
-[node name="Camera3D" type="Camera3D" parent="creature_generator/Player"]
-transform = Transform3D(-0.00956674, 0.0398395, 0.99916, 0.99982, -0.015966, 0.0102097, 0.0163594, 0.999079, -0.0396796, -0.902516, 0.0108461, 0)
-environment = ExtResource("6_qamsj")
-far = 10000.0
-
-[node name="AudioListener3D" type="AudioListener3D" parent="creature_generator/Player/Camera3D"]
-
 [node name="Head" parent="creature_generator/Player" instance=ExtResource("5_6rhit")]
 transform = Transform3D(0.00514868, 4.37108e-08, -0.999987, -4.37108e-08, 1, 4.34863e-08, 0.999987, 4.34863e-08, 0.00514868, 0.073765, 0, 0)
 
@@ -45,10 +38,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7788, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.89075, 0, 0)
 
 [node name="FishBody4" parent="creature_generator/Player" instance=ExtResource("6_ltq88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 
-[node name="spineanimator" type="Node" parent="creature_generator"]
+[node name="Camera3D" type="Camera3D" parent="creature_generator/Player"]
+transform = Transform3D(-0.0175236, 0.0399653, 0.999047, 0.999713, -0.0156485, 0.0181613, 0.0163594, 0.999079, -0.0396796, -0.886358, 0.017048, 0)
+environment = ExtResource("6_qamsj")
+far = 10000.0
+
+[node name="AudioListener3D" type="AudioListener3D" parent="creature_generator/Player/Camera3D"]
+
+[node name="spineanimator" type="Node" parent="creature_generator/Player"]
 script = ExtResource("5_ipc4n")
-bonePaths = [NodePath("../Player/Head"), NodePath("../Player/FishBody"), NodePath("../Player/FishBody2"), NodePath("../Player/FishBody3"), NodePath("../Player/FishBody4")]
+bonePaths = [NodePath("../Head"), NodePath("../FishBody"), NodePath("../FishBody2"), NodePath("../FishBody3"), NodePath("../FishBody4")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691)
