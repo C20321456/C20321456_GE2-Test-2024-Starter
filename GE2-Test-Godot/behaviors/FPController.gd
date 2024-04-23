@@ -32,7 +32,10 @@ var slowing_radius
 var boid
 var feeler
 
+var MovementEnabled
+var movement = false
 var pause
+
 
 func draw_gizmos_recursive(gizzy):
 	draw_Gizmo = gizzy
@@ -46,6 +49,9 @@ func on_draw_gizmos():
 	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.x * 10.0 , Color(1, 0, 0), 0.1)
 	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.y * 10.0 , Color(0, 1, 0), 0.1)
 	#DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + force, Color(1, 1, 0), 0.1)
+	
+	if MovementEnabled:
+		DebugDraw3D.draw_sphere(movement, 1, Color.RED)
 
 func _input(event):
 	if event is InputEventMouseMotion and controlling:

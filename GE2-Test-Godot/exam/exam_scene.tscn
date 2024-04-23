@@ -1,19 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://b26ra08yh7e5m"]
+[gd_scene load_steps=10 format=3 uid="uid://b26ra08yh7e5m"]
 
 [ext_resource type="Script" path="res://behaviors/root.gd" id="1_prfgg"]
 [ext_resource type="Script" path="res://behaviors/CamFollow.gd" id="4_ipa0t"]
+[ext_resource type="PackedScene" uid="uid://ch1g1dtf7c0vk" path="res://exam/FishHead.tscn" id="5_6rhit"]
 [ext_resource type="Script" path="res://behaviors/FPController.gd" id="5_8r2ni"]
 [ext_resource type="Script" path="res://behaviors/SpineAnimator.gd" id="5_ipc4n"]
-[ext_resource type="Script" path="res://behaviors/Wander.gd" id="6_mv1jw"]
+[ext_resource type="PackedScene" uid="uid://dmfika3nh0ywu" path="res://exam/FishBody.tscn" id="6_ltq88"]
 [ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://behaviors/seek_environment..tres" id="6_qamsj"]
 [ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="7_ybx0x"]
 
 [sub_resource type="SphereShape3D" id="18"]
 radius = 1.31211
-
-[sub_resource type="PrismMesh" id="PrismMesh_13tti"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_vqp1p"]
 
 [node name="exam" type="Node3D"]
 script = ExtResource("1_prfgg")
@@ -21,50 +18,39 @@ script = ExtResource("1_prfgg")
 [node name="creature_generator" type="Node3D" parent="."]
 
 [node name="Player" type="CharacterBody3D" parent="creature_generator"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.00961, 20, 0)
 script = ExtResource("5_8r2ni")
 speed = 10.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="creature_generator/Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.596296, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.818927, 0, 0)
 shape = SubResource("18")
 
 [node name="Camera3D" type="Camera3D" parent="creature_generator/Player"]
-transform = Transform3D(-0.00956674, 0.0398395, 0.99916, 0.99982, -0.015966, 0.0102097, 0.0163594, 0.999079, -0.0396796, 0.561756, 0.0108461, 0)
+transform = Transform3D(-0.00956674, 0.0398395, 0.99916, 0.99982, -0.015966, 0.0102097, 0.0163594, 0.999079, -0.0396796, -0.902516, 0.0108461, 0)
 environment = ExtResource("6_qamsj")
 far = 10000.0
 script = ExtResource("4_ipa0t")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="creature_generator/Player/Camera3D"]
 
-[node name="Head" type="MeshInstance3D" parent="creature_generator/Player"]
-transform = Transform3D(-0.0157771, -0.999876, -4.3706e-08, 0.999876, -0.0157771, -4.4401e-08, 4.3706e-08, -4.4401e-08, 1, 0.586521, 0, 0)
-mesh = SubResource("PrismMesh_13tti")
+[node name="Head" parent="creature_generator/Player" instance=ExtResource("5_6rhit")]
+transform = Transform3D(0.00514868, 4.37108e-08, -0.999987, -4.37108e-08, 1, 4.34863e-08, 0.999987, 4.34863e-08, 0.00514868, 0.073765, 0, 0)
 
-[node name="Body" type="MeshInstance3D" parent="creature_generator/Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70403, 0, 0)
-mesh = SubResource("BoxMesh_vqp1p")
+[node name="FishBody" parent="creature_generator/Player" instance=ExtResource("6_ltq88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.68944, 0, 0)
 
-[node name="Body2" type="MeshInstance3D" parent="creature_generator/Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86236, 0, 0)
-mesh = SubResource("BoxMesh_vqp1p")
+[node name="FishBody2" parent="creature_generator/Player" instance=ExtResource("6_ltq88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7788, 0, 0)
 
-[node name="Body3" type="MeshInstance3D" parent="creature_generator/Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95522, 0, 0)
-mesh = SubResource("BoxMesh_vqp1p")
+[node name="FishBody3" parent="creature_generator/Player" instance=ExtResource("6_ltq88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.89075, 0, 0)
 
-[node name="tail" type="MeshInstance3D" parent="creature_generator/Player"]
-transform = Transform3D(0.0157756, 0.999781, -0.0137703, 0.999876, -0.0157771, 4.30176e-08, -0.000217212, -0.0137685, -0.999905, 5.05387, 0, 0)
-mesh = SubResource("PrismMesh_13tti")
+[node name="FishBody4" parent="creature_generator/Player" instance=ExtResource("6_ltq88")]
 
 [node name="spineanimator" type="Node" parent="creature_generator"]
 script = ExtResource("5_ipc4n")
-bonePaths = [NodePath("../Player/Head"), NodePath("../Player/Body"), NodePath("../Player/Body2"), NodePath("../Player/Body3"), NodePath("../Player/tail")]
-
-[node name="Wander" type="Node" parent="creature_generator"]
-script = ExtResource("6_mv1jw")
-draw_gizmos = false
-enabled = false
+bonePaths = [NodePath("../Player/Head"), NodePath("../Player/FishBody"), NodePath("../Player/FishBody2"), NodePath("../Player/FishBody3"), NodePath("../Player/FishBody4")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691)
