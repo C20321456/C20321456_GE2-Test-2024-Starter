@@ -1,11 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://b26ra08yh7e5m"]
+[gd_scene load_steps=8 format=3 uid="uid://b26ra08yh7e5m"]
 
 [ext_resource type="Script" path="res://behaviors/root.gd" id="1_prfgg"]
+[ext_resource type="Script" path="res://behaviors/CamFollow.gd" id="4_ipa0t"]
 [ext_resource type="Script" path="res://behaviors/FPController.gd" id="5_8r2ni"]
+[ext_resource type="PackedScene" uid="uid://chdm2fe4bopcl" path="res://behaviors/Fish3.tscn" id="5_hs2a0"]
 [ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://behaviors/seek_environment..tres" id="6_qamsj"]
 [ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="7_ybx0x"]
 
 [sub_resource type="SphereShape3D" id="18"]
+radius = 1.31211
 
 [node name="exam" type="Node3D"]
 script = ExtResource("1_prfgg")
@@ -18,13 +21,19 @@ script = ExtResource("5_8r2ni")
 speed = 10.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.596296, 0, 0)
 shape = SubResource("18")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(-0.101342, 0.0411373, 0.994001, 0.994717, -0.01224, 0.101921, 0.0163594, 0.999079, -0.0396796, 0.561756, 0.0108461, 0)
 environment = ExtResource("6_qamsj")
 far = 10000.0
+script = ExtResource("4_ipa0t")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Camera3D"]
+
+[node name="Fish" parent="Player" instance=ExtResource("5_hs2a0")]
+transform = Transform3D(0.00651005, 4.37105e-08, -0.999979, -4.37105e-08, 1, 4.34268e-08, 0.999979, 4.34268e-08, 0.00651005, 1.58818, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.0512, 0.23691)
