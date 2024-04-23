@@ -7,14 +7,18 @@ extends Node3D
 
 @export var sensitivity = 0.1
 @export var speed:float = 1.0
+@export var draw_Gizmo = true
 
 var move_and_slide
+var max_speed
 
 var controlling = true
 
 var left:XRController3D
 var right:XRController3D
 
+
+var force
 var length
 var frequncy
 var start_angle
@@ -30,6 +34,18 @@ var feeler
 
 var pause
 
+func draw_gizmos_recursive(gizzy):
+	draw_Gizmo = gizzy
+	var children = get_children()
+	for child in children:
+		if child is SteeringBehavior:
+			child.draw_gizmos = gizzy
+
+func on_draw_gizmos():
+	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.z * 10.0 , Color(0, 0, 1), 0.1)
+	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.x * 10.0 , Color(1, 0, 0), 0.1)
+	DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + transform.basis.y * 10.0 , Color(0, 1, 0), 0.1)
+	#DebugDraw3D.draw_arrow(global_transform.origin,  global_transform.origin + force, Color(1, 1, 0), 0.1)
 
 func _input(event):
 	if event is InputEventMouseMotion and controlling:
@@ -54,27 +70,13 @@ func _ready():
 
 @export var can_move:bool = true
 
-func _redraw(gizmo):
-	gizmo.clear()
-
-	var node3d = gizmo.get_node_3d()
-
-	var lines = PackedVector3Array()
-
-	lines.push_back(Vector3(0, 1, 0))
-	lines.push_back(Vector3(0, node3d.my_custom_value, 0))
-
-	var handles = PackedVector3Array()
-
-	handles.push_back(Vector3(0, 1, 0))
-	handles.push_back(Vector3(0, node3d.my_custom_value, 0))
-
-	DebugDraw3D.draw_sphere(target.global_transform.origin, slowing_radius, Color.VIOLET)
-	DebugDraw3D.draw_line(boid.global_transform.origin, feeler.hit_target, Color.CHARTREUSE)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 
+	if draw_Gizmo:
+		on_draw_gizmos()
+		
 	if can_move:
 		var v = Vector3.ZERO
 		
@@ -100,3 +102,8 @@ func _process(delta):
 		if abs(upanddown) > 0:     
 			global_translate(- global_transform.basis.y * speed * upanddown * mult * delta)
 
+func seek_force(target: Vector3):	
+	var toTarget = target - global_transform.origin
+	toTarget = toTarget.normalized()
+	var desired = toTarget * max_speed
+	return desired - velocity
